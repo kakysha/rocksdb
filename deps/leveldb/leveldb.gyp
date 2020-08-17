@@ -28,6 +28,7 @@
         ['OS == "win"', {
             'include_dirs': [
                  'leveldb-<(ldbversion)/port/win/'
+            #  ,  'port-libuv/'
             ]
           , 'defines': [
                 'LEVELDB_PLATFORM_UV=1'
@@ -36,6 +37,9 @@
               , '_HAS_EXCEPTIONS=1'
             ]
           , 'sources': [
+            #    'port-libuv/port_uv.cc'
+            #  , 'port-libuv/env_win.cc'
+            #  , 'port-libuv/win_logger.cc'
                'leveldb-<(ldbversion)/port/win/port_win.cc'
              , 'leveldb-<(ldbversion)/port/win/io_win.cc'
              , 'leveldb-<(ldbversion)/port/win/xpress_win.cc'
@@ -169,9 +173,11 @@
                     '-mmacosx-version-min=10.8'
                   , '-std=c++11'
                   , '-stdlib=libc++'
-                  , '-march=native'
+                  , '-march=core2'
+                  , '-mtune=haswell'
                   , '-fno-omit-frame-pointer'
                   , '-momit-leaf-frame-pointer'
+                  #, '-mno-bmi2'
                 ]
 # , 'OTHER_LDFLAGS': ['-stdlib=libc++']
                 , 'GCC_ENABLE_CPP_RTTI': 'YES'
